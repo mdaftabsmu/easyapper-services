@@ -21,6 +21,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
 	runtime group: 'com.h2database', name: 'h2', version: '1.4.199'
 }
 

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Map;
 import java.util.Objects;
 
-@Document(collection = "users-events")
+@Document(collection = "users_events")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserEvent {
@@ -23,6 +23,11 @@ public class UserEvent {
     @Field("email")
     @NotEmpty(message = "email can not be empty.")
     private String email;
+    @Field("hashcode")
+    private Integer hashCode;
+    @Field("is-active")
+    private Boolean isActive = true;
+
 
     public UserEvent(){
 
@@ -58,19 +63,36 @@ public class UserEvent {
         this.email = email;
     }
 
+    public Integer getHashCode() {
+        return hashCode;
+    }
+
+    public void setHashCode(Integer hashCode) {
+        this.hashCode = hashCode;
+    }
+
+    public Boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Boolean active) {
+        isActive = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof UserEvent)) return false;
         UserEvent userEvent = (UserEvent) o;
-        return Objects.equals(id, userEvent.id) &&
-                Objects.equals(userAdvAndLoc, userEvent.userAdvAndLoc) &&
-                Objects.equals(email, userEvent.email);
+        return Objects.equals(getId(), userEvent.getId()) &&
+                Objects.equals(getUserAdvAndLoc(), userEvent.getUserAdvAndLoc()) &&
+                Objects.equals(getEmail(), userEvent.getEmail()) &&
+                Objects.equals(getHashCode(), userEvent.getHashCode()) &&
+                Objects.equals(isActive, userEvent.isActive);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userAdvAndLoc, email);
+        return Objects.hash(getUserAdvAndLoc());
     }
-
 }
